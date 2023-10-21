@@ -49,6 +49,15 @@ resource "aws_iam_policy" "sqs_lambda_demo_lambdapolicy" {
       ],
       "Resource": "${aws_sqs_queue.MySQSqueue.arn}"
     },
+     {
+                "Effect": "Allow",
+                "Action": [
+                    "dynamodb:GetItem",
+                    "dynamodb:PutItem",
+                    "dynamodb:UpdateItem"
+                ],
+                "Resource": "arn:aws:dynamodb:*:*:table/${var.dynamodb_table}"
+            },
     {
       "Effect": "Allow",
       "Action": [
@@ -74,6 +83,11 @@ resource "aws_lambda_function" "sqs_lambda_demo_function" {
   role = aws_iam_role.sqs_lambda_demo_functionrole.arn
   handler = "index.handler"
   runtime = "nodejs16.x"
+   environment {
+      variables = {
+        DDB_TABLE = var.dynamodb_table
+      }
+    }
 }
 
 resource "aws_lambda_event_source_mapping" "sqs_lambda_demo_sourcemapping" {

@@ -10,4 +10,5 @@ terraform apply
 
 command should be output on cmd line after apply
 
-"curl --location --request POST 'https://cyocj4beqh.execute-api.us-east-1.amazonaws.com/default/submit' --header 'Content-Type: application/json'  --data-raw '{ \"TestMessage\": \"Hello From ApiGateway!\" }'"
+
+curl --location --request POST 'https://uuwyu1yyxj.execute-api.us-east-1.amazonaws.com/default/submit' --header 'Content-Type: application/json'  --data-raw '{"year":2023, "title": "Hello From ApiGateway!" }'
